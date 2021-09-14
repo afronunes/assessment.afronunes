@@ -78,7 +78,7 @@ public class StreamSingleton {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(pInputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
-                lines.add(line.concat("\n"));
+                lines.add(line.concat(",\n"));
             }
         }
         return lines;

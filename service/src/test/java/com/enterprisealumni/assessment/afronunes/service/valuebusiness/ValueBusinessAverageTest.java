@@ -25,12 +25,39 @@ public class ValueBusinessAverageTest {
     @Test
     public void averageTest() {
 
-        final BigDecimal expected = new BigDecimal("10619.17");
+        final BigDecimal expected = new BigDecimal("72.87");
 
-        values.add(new BigDecimal("14554"));
-        values.add(new BigDecimal("7899.5"));
-        values.add(new BigDecimal("12124.05"));
-        values.add(new BigDecimal("7899.10"));
+        values.add(new BigDecimal(100));
+        values.add(new BigDecimal(57.0));
+        values.add(new BigDecimal(84.0));
+        values.add(new BigDecimal(35.0));
+        values.add(new BigDecimal(87.0));
+        values.add(new BigDecimal(67.0));
+        values.add(new BigDecimal(66.0));
+        values.add(new BigDecimal(92.0));
+        values.add(new BigDecimal(39.0));
+        values.add(new BigDecimal(57.0));
+        values.add(new BigDecimal(65.0));
+        values.add(new BigDecimal(65.0));
+        values.add(new BigDecimal(60.0));
+        values.add(new BigDecimal(39.0));
+        values.add(new BigDecimal(89.0));
+        values.add(new BigDecimal(49.0));
+        values.add(new BigDecimal(71.0));
+        values.add(new BigDecimal(77.0));
+        values.add(new BigDecimal(89.0));
+        values.add(new BigDecimal(67.0));
+        values.add(new BigDecimal(74.0));
+        values.add(new BigDecimal(70.0));
+        values.add(new BigDecimal(52.0));
+        values.add(new BigDecimal(69.0));
+        values.add(new BigDecimal(88.0));
+        values.add(new BigDecimal(85.0));
+        values.add(new BigDecimal(99.0));
+        values.add(new BigDecimal(100));
+        values.add(new BigDecimal(97.0));
+        values.add(new BigDecimal(97.0));
+
         assertTrue(ValueBusinessSingleton.average(values, 2).compareTo(expected) == 0);
     }
 

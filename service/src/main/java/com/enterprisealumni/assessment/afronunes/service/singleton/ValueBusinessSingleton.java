@@ -58,7 +58,7 @@ public class ValueBusinessSingleton {
         BigDecimal sum = pValues.stream()
                 .map(Objects::requireNonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return sum.setScale(pScale, RoundingMode.HALF_UP).divide(new BigDecimal(pValues.size()), RoundingMode.UP);
+        return sum.setScale(pScale, RoundingMode.UP).divide(new BigDecimal(pValues.size()), RoundingMode.UP);
     }
 
     /**
