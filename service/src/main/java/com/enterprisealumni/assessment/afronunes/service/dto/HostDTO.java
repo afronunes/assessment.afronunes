@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * Represents a Dara Transfer Object for {@link com.enterprisealumni.assessment.afronunes.service.bo.Host}
  */
 @Data
-public class HostDTO implements Comparable<HostDTO>{
+public class HostDTO implements Comparable<HostDTO> {
 
     private String name;
     private BigDecimal average;
@@ -29,7 +29,7 @@ public class HostDTO implements Comparable<HostDTO>{
      * n10: Average: 55.0 Max: 85.2 Min: 12.1
      */
     public String getFullInfo() {
-        return String.format("%s: Average: %s Max: %s Min: %s ", name, average.toString(), max.toString(), min.toString());
+        return String.format("%s: Average: %s Max: %s Min: %s", name, average.toString(), max.toString(), min.toString());
     }
 
     public String getName() {
@@ -40,12 +40,12 @@ public class HostDTO implements Comparable<HostDTO>{
         this.name = name;
     }
 
-    public BigDecimal getMin() {
-        return min;
+    public BigDecimal getAverage() {
+        return average;
     }
 
-    public void setMin(BigDecimal min) {
-        this.min = min;
+    public void setAverage(BigDecimal average) {
+        this.average = average;
     }
 
     public BigDecimal getMax() {
@@ -56,12 +56,11 @@ public class HostDTO implements Comparable<HostDTO>{
         this.max = max;
     }
 
-    public BigDecimal getAverage() {
-        return average;
+    public BigDecimal getMin() {
+        return min;
     }
 
-    public void setAverage(BigDecimal average) {
-        this.average = average;
+    public void setMin(BigDecimal min) {
+        this.min = min;
     }
-
 }

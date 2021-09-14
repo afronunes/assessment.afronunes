@@ -22,30 +22,30 @@ public class ValueBusinessMaxMinTest {
 
     final static ValueBusinessSingleton utilSingleton = ValueBusinessSingleton.getInstance();
 
-    private List<BigDecimal> values = new ArrayList<>();
+    private final List<BigDecimal> values = new ArrayList<>();
 
-    private BigDecimal MIN_EXPECTED = new BigDecimal(28);
+    private final BigDecimal MIN_EXPECTED = new BigDecimal(28);
 
-    private BigDecimal MAX_EXPECTED = new BigDecimal(100);
+    private final BigDecimal MAX_EXPECTED = new BigDecimal(100);
 
     @Before
     public void setUp() throws Exception {
 
         final String valuesString = "37.0,65.0,87.0,41.0,100.0,76.0,83.0,82.0,50.0,54.0,46.0,28.0,68.0,69.0,94.0,90.0,57.0,47.0,94.0,83.0,79.0,85.0,99.0,77.0,85.0,70.0,91.0,88.0,64.0,89.0";
         List<String> myList = new ArrayList<String>(Arrays.asList(valuesString.split(",")));
-        myList.forEach(valueString ->{
+        myList.forEach(valueString -> {
             values.add(new BigDecimal(valueString));
         });
     }
 
     @Test
     public void maxTest() {
-        assertTrue(utilSingleton.getMaxValue(values).compareTo(MAX_EXPECTED) == 0);
+        assertTrue(ValueBusinessSingleton.getMaxValue(values).compareTo(MAX_EXPECTED) == 0);
     }
 
     @Test
     public void minTest() {
-        assertTrue(utilSingleton.getMinValue(values).compareTo(MIN_EXPECTED) == 0);
+        assertTrue(ValueBusinessSingleton.getMinValue(values).compareTo(MIN_EXPECTED) == 0);
     }
 
 }

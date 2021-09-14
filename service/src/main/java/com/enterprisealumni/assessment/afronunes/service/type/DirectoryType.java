@@ -11,7 +11,7 @@ public enum DirectoryType {
 
     INPUT("files/input/"), OUTPUT("files/output/");
 
-    private String path;
+    private final String path;
 
     DirectoryType(String path) {
         this.path = path;

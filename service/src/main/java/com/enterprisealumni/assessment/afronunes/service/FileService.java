@@ -6,7 +6,6 @@ package com.enterprisealumni.assessment.afronunes.service;
 
 import com.enterprisealumni.assessment.afronunes.service.type.DirectoryType;
 
-import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -14,10 +13,8 @@ import java.io.InputStream;
  */
 public interface FileService {
 
-    final  String CLASS_PATH = "classpath:";
+    String CLASS_PATH = "classpath:";
 
-    public File createFile(final DirectoryType pDirectoryType, final String pFileName) throws Exception;
-
-    public InputStream loadFile(final DirectoryType pDirectoryType, final String pFileName) throws Exception;
+    InputStream loadFile(final DirectoryType pDirectoryType, final String pFileName) throws Exception;
 
 }

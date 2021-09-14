@@ -6,6 +6,7 @@ package com.enterprisealumni.assessment.afronunes.controller;
 
 import com.enterprisealumni.assessment.afronunes.controller.exception.ErrorLoadingFileException;
 import com.enterprisealumni.assessment.afronunes.service.HostService;
+import com.enterprisealumni.assessment.afronunes.service.config.FileConfig;
 import com.enterprisealumni.assessment.afronunes.service.dto.HostDTO;
 import com.enterprisealumni.assessment.afronunes.service.type.HostFilesType;
 import org.springframework.core.io.InputStreamResource;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,10 +33,21 @@ public class HostAPI {
     /**
      * HostService injected by constructor
      */
-    private HostService hostService;
+    private final HostService hostService;
 
-    public HostAPI(final HostService pHostService) {
+    /**
+     * FileConfig injected by constructor
+     */
+    private final FileConfig fileConfig;
+
+    /**
+     * Contructor for HostAPI
+     *
+     * @param pHostService
+     */
+    public HostAPI(final HostService pHostService, final FileConfig pFileConfig) {
         this.hostService = pHostService;
+        this.fileConfig = pFileConfig;
     }
 
     @GetMapping(path = URL_HOSTS_JSON, produces = MediaType.APPLICATION_JSON_VALUE)

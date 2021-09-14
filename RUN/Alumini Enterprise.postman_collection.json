@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "fdcdd76a-2167-4381-8b6c-8d1b8880dc01",
+		"name": "Alumini Entreprise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hosts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Http Status: \" + responseCode.code + ' - ' + responseCode.name, function () {",
+							"",
+							"    pm.response.to.be.success;",
+							"    ",
+							"    pm.test('Status code = ' + responseCode.code, function () {",
+							"        pm.expect(responseCode.code).to.be.eq(200);",
+							"    });",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/hosts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hosts"
+					],
+					"query": [
+						{
+							"key": "$order",
+							"value": "ASC",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hosts Json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Http Status: \" + responseCode.code + ' - ' + responseCode.name, function () {",
+							"",
+							"    pm.response.to.be.success;",
+							"    ",
+							"    pm.test('Status code = ' + responseCode.code, function () {",
+							"        pm.expect(responseCode.code).to.be.eq(200);",
+							"    });",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/hosts/json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hosts",
+						"json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hosts  File",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Http Status: \" + responseCode.code + ' - ' + responseCode.name, function () {",
+							"",
+							"    pm.response.to.be.success;",
+							"    ",
+							"    pm.test('Status code = ' + responseCode.code, function () {",
+							"        pm.expect(responseCode.code).to.be.eq(200);",
+							"    });",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/hosts/file",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"hosts",
+						"file"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

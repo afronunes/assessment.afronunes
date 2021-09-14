@@ -1,5 +1,8 @@
 package com.enterprisealumni.assessment.afronunes.service;
 
+import com.enterprisealumni.assessment.afronunes.service.singleton.StreamSingleton;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ public class TestUtils {
      *
      * @return
      */
-    public static List<String> getFileLines()  {
+    public static List<String> getFileLines() {
 
         final List<String> lines = new ArrayList<>();
         lines.add("n10,1366829460,1366831260,60|37.0,65.0,87.0,41.0,100.0,76.0,83.0,82.0,50.0,54.0,46.0,28.0,68.0,69.0,94.0,90.0,57.0,47.0,94.0,83.0,79.0,85.0,99.0,77.0,85.0,70.0,91.0,88.0,64.0,89.0");
@@ -36,5 +39,15 @@ public class TestUtils {
         lines.add("n34,1366829460,1366831260,60|48.0,46.0,75.0,95.0,71.0,63.0,36.0,59.0,76.0,100.0,79.0,61.0,79.0,60.0,94.0,98.0,56.0,76.0,68.0,92.0,97.0,99.0,68.0,72.0,63.0,98.0,74.0,98.0,58.0,91.0");
 
         return lines;
+    }
+
+    /**
+     * Returns a file mocked
+     *
+     * @return
+     * @throws Exception
+     */
+    public static InputStream getMockedFile() throws Exception {
+        return StreamSingleton.getInstance().getInputStream(TestUtils.getFileLines());
     }
 }

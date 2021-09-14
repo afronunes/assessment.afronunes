@@ -18,12 +18,12 @@ public class HostMapperTest {
 
     private final HostMapper hostMapper = HostMapper.INSTANCE;
 
-    private Host host = new Host();
+    private final Host host = new Host();
 
-    private String HOST_NAME = "hostName";
-    private BigDecimal HOST_MIN = new BigDecimal(4);
-    private BigDecimal HOST_MAX = new BigDecimal(10);
-    private BigDecimal HOST_AVERAGE = new BigDecimal(10);
+    private final String HOST_NAME = "hostName";
+    private final BigDecimal HOST_MIN = new BigDecimal(4);
+    private final BigDecimal HOST_MAX = new BigDecimal(10);
+    private final BigDecimal HOST_AVERAGE = new BigDecimal(10);
 
     @Before
     public void setUp() {

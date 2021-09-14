@@ -77,9 +77,9 @@ public class HostFactory {
 
             // could use values.sort and get first and last here but is a good opportunity to exemplify a Singleton
             // set rest of attr
-            host.setMax(valueBusinessSingleton.getMaxValue(values));
-            host.setMin(valueBusinessSingleton.getMinValue(values));
-            host.setAverage(valueBusinessSingleton.average(values, DEFAULT_HOST_VALUE_SCALE));
+            host.setMax(ValueBusinessSingleton.getMaxValue(values));
+            host.setMin(ValueBusinessSingleton.getMinValue(values));
+            host.setAverage(ValueBusinessSingleton.average(values, DEFAULT_HOST_VALUE_SCALE));
 
         }
         return host;

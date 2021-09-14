@@ -20,7 +20,7 @@ public class ValueBusinessAverageTest {
 
     final static ValueBusinessSingleton utilSingleton = ValueBusinessSingleton.getInstance();
 
-    private List<BigDecimal> values = new ArrayList<>();
+    private final List<BigDecimal> values = new ArrayList<>();
 
     @Test
     public void averageTest() {
@@ -31,7 +31,7 @@ public class ValueBusinessAverageTest {
         values.add(new BigDecimal("7899.5"));
         values.add(new BigDecimal("12124.05"));
         values.add(new BigDecimal("7899.10"));
-        assertTrue(utilSingleton.average(values, 2).compareTo(expected) == 0);
+        assertTrue(ValueBusinessSingleton.average(values, 2).compareTo(expected) == 0);
     }
 
 }

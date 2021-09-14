@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  * Defines HostFilesType.
- *
+ * <p>
  * This class gives the possibility to read different file formats. These regexes could be registered in the database, for example.
  */
 public enum HostFilesType {
@@ -55,8 +55,8 @@ public enum HostFilesType {
             Pattern patternValue = Pattern.compile(HostFilesType.DEFAULT.valuePattern);
             Matcher matcherValue = patternValue.matcher(matcherValues.group(1));
 
-            while (matcherValue.find()){
-               System.out.println(matcherValue.group(1));
+            while (matcherValue.find()) {
+                System.out.println(matcherValue.group(1));
             }
 
         }

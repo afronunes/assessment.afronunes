@@ -15,7 +15,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface HostMapper {
 
-    final HostMapper INSTANCE = Mappers.getMapper(HostMapper.class);
+    HostMapper INSTANCE = Mappers.getMapper(HostMapper.class);
 
-    public HostDTO hostToHostDTO(Host pHost);
+    HostDTO hostToHostDTO(Host pHost);
 }
