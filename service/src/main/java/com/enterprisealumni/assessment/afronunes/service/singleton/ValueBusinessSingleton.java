@@ -1,3 +1,7 @@
+/**
+ * Name: Afro Netto Nunes Faria
+ * Date: 21-09-13
+ */
 package com.enterprisealumni.assessment.afronunes.service.singleton;
 
 import java.math.BigDecimal;

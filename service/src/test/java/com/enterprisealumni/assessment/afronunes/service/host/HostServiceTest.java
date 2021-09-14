@@ -8,6 +8,7 @@ import com.enterprisealumni.assessment.afronunes.service.HostService;
 import com.enterprisealumni.assessment.afronunes.service.TestUtils;
 import com.enterprisealumni.assessment.afronunes.service.impl.HostServiceImpl;
 import com.enterprisealumni.assessment.afronunes.service.FileService;
+import com.enterprisealumni.assessment.afronunes.service.mapper.HostMapper;
 import com.enterprisealumni.assessment.afronunes.service.type.DirectoryType;
 import com.enterprisealumni.assessment.afronunes.service.type.HostFilesType;
 import org.apache.commons.io.FileUtils;
@@ -28,7 +29,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
- * The purpose of this class is to test  {@link HostServiceImpl#getHostsFromFile(String)}.
+ * The purpose of this class is to test  {@link HostServiceImpl#getHostsFromFile(String, HostFilesType)}.
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -46,11 +47,13 @@ public class HostServiceTest {
     @Mock
     private FileService fileService;
 
+    private HostMapper hostMapper = HostMapper.INSTANCE;
+
     @Before
     public void setUp() throws Exception {
 
         // simple instance
-        hostService = new HostServiceImpl(fileService);
+        hostService = new HostServiceImpl(fileService,hostMapper);
 
         // mock fileService
         when(fileService.loadFile(Matchers.any(DirectoryType.class), anyString())).thenReturn(getMockedFile());

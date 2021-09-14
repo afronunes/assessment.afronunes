@@ -1,26 +1,15 @@
-package com.enterprisealumni.assessment.afronunes.controller;
+package com.enterprisealumni.assessment.afronunes.service.mapper;
 
-import com.enterprisealumni.assessment.afronunes.controller.dto.HostDTO;
-import com.enterprisealumni.assessment.afronunes.controller.mapper.HostMapper;
-import com.enterprisealumni.assessment.afronunes.service.HostService;
 import com.enterprisealumni.assessment.afronunes.service.bo.Host;
-import com.enterprisealumni.assessment.afronunes.service.impl.FileServiceImpl;
-import com.enterprisealumni.assessment.afronunes.service.type.DirectoryType;
+import com.enterprisealumni.assessment.afronunes.service.dto.HostDTO;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * The purpose of this class is to test {@link HostMapper#hostToHostDTO(Host)}

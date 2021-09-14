@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 /**
  * Represents a Host.
  */
-public class Host {
+public class Host implements Comparable<Host> {
 
     private String name;
 
@@ -59,5 +59,10 @@ public class Host {
 
     public void setAverage(BigDecimal average) {
         this.average = average;
+    }
+
+    @Override
+    public int compareTo(Host o) {
+        return 0;
     }
 }

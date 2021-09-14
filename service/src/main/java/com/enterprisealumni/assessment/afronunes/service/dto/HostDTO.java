@@ -1,4 +1,8 @@
-package com.enterprisealumni.assessment.afronunes.controller.dto;
+/**
+ * Name: Afro Netto Nunes Faria
+ * Date: 21-09-14
+ */
+package com.enterprisealumni.assessment.afronunes.service.dto;
 
 import lombok.Data;
 
@@ -11,25 +15,21 @@ import java.math.BigDecimal;
 public class HostDTO implements Comparable<HostDTO>{
 
     private String name;
-
+    private BigDecimal average;
+    private BigDecimal max;
     private BigDecimal min;
 
-    private BigDecimal max;
-
-    private BigDecimal average;
+    @Override
+    public int compareTo(HostDTO o) {
+        return this.getAverage().compareTo(o.getAverage());
+    }
 
     /**
      * Model
      * n10: Average: 55.0 Max: 85.2 Min: 12.1
      */
-    @Override
-    public String toString() {
-        return String.format("%s: Average: %s Max: %s Min: %s \n", name, average.toString(), max.toString(), min.toString());
-    }
-
-    @Override
-    public int compareTo(HostDTO o) {
-        return this.getAverage().compareTo(o.getAverage());
+    public String getFullInfo() {
+        return String.format("%s: Average: %s Max: %s Min: %s ", name, average.toString(), max.toString(), min.toString());
     }
 
     public String getName() {
