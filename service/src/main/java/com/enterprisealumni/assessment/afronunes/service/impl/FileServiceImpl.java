@@ -7,9 +7,11 @@ package com.enterprisealumni.assessment.afronunes.service.impl;
 import com.enterprisealumni.assessment.afronunes.service.FileService;
 import com.enterprisealumni.assessment.afronunes.service.type.DirectoryType;
 import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 
@@ -17,6 +19,12 @@ import java.net.URL;
 public class FileServiceImpl implements FileService {
 
     final ClassLoader classLoader = getClass().getClassLoader();
+
+    ResourceLoader resourceLoader;
+
+    public FileServiceImpl(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @Override
     public File createFile(final DirectoryType pDirectoryType, final String pFileName) throws Exception {
@@ -34,7 +42,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File loadFile(final DirectoryType pDirectoryType, final String pFileName) {
-        return new File(classLoader.getResource(pDirectoryType.getPath() + pFileName).getFile());
+    public InputStream loadFile(final DirectoryType pDirectoryType, final String pFileName) throws Exception {
+        return resourceLoader.getResource(CLASS_PATH + pDirectoryType.getPath() + pFileName).getInputStream();
     }
 }

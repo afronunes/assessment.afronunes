@@ -10,6 +10,7 @@ import com.enterprisealumni.assessment.afronunes.service.type.HostFilesType;
 import org.springframework.core.io.InputStreamResource;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public interface HostService {
 
-    public List<HostDTO> getHostsFromFile(final  String pFileName, final HostFilesType pHostFilesType);
+    public List<HostDTO> getHostsFromFile(final  String pFileName, final HostFilesType pHostFilesType) throws Exception;
 
-    public InputStreamResource getHostsFileFromFile(final  String pFileName, final HostFilesType pHostFilesType) throws Exception;
+    public InputStream getHostsFileFromFile(final  String pFileName, final HostFilesType pHostFilesType) throws Exception;
 }

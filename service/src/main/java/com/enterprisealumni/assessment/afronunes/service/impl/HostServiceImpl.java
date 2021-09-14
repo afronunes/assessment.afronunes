@@ -12,15 +12,10 @@ import com.enterprisealumni.assessment.afronunes.service.mapper.HostMapper;
 import com.enterprisealumni.assessment.afronunes.service.type.DirectoryType;
 import com.enterprisealumni.assessment.afronunes.service.bo.Host;
 import com.enterprisealumni.assessment.afronunes.service.type.HostFilesType;
-import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,14 +34,15 @@ public class HostServiceImpl implements HostService {
     }
 
     @Override
-    public List<HostDTO> getHostsFromFile(final String pFileName, final HostFilesType pHostFilesType) {
+    public List<HostDTO> getHostsFromFile(final String pFileName, final HostFilesType pHostFilesType) throws Exception {
 
         final List<Host> hosts = new ArrayList<>();
 
-        final File file = fileService.loadFile(DirectoryType.INPUT, pFileName);
+        final  InputStream fileInputStream = fileService.loadFile(DirectoryType.INPUT, pFileName);
 
         try {
-            List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
+
+            List<String> lines = readLinesFromInputStream(fileInputStream);
 
             lines.forEach(line -> {
                 hosts.add(HostFactory.createHost(line, pHostFilesType));
@@ -69,21 +65,49 @@ public class HostServiceImpl implements HostService {
     }
 
     @Override
-    public InputStreamResource getHostsFileFromFile(final String pFileName, final HostFilesType pHostFilesType) throws Exception {
+    public InputStream getHostsFileFromFile(final String pFileName, final HostFilesType pHostFilesType) throws Exception {
 
         final List<HostDTO> hosts = getHostsFromFile(pFileName, pHostFilesType);
 
-        // create file
-        final File hostFile = fileService.createFile(DirectoryType.OUTPUT,"host_file_out.txt");
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        FileUtils.writeLines(hostFile,hosts.stream().map(HostDTO::getFullInfo).collect(Collectors.toList()));
+        try {
 
-        InputStreamResource fileResource = new InputStreamResource(new FileInputStream(hostFile));
+            final List<String> lines = hosts.stream().map(HostDTO::getFullInfo).collect(Collectors.toList());
 
-        FileUtils.deleteQuietly(hostFile);
+            final byte[] lineSeparator = System.lineSeparator().getBytes();
 
-        return  fileResource;
+            for (String line : lines) {
+                out.write(line.getBytes());
+                out.write(lineSeparator);
+            }
 
+            return new ByteArrayInputStream(out.toByteArray());
+
+        }
+        catch(Exception ex) {
+            throw ex;
+        }
+
+        finally {
+            if(out!=null) out.close();
+        }
+
+    }
+
+    private List<String> readLinesFromInputStream(InputStream inputStream)
+            throws IOException {
+
+        List<String> lines = new ArrayList<>();
+
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line.concat("\n"));
+            }
+        }
+        return lines;
     }
 
 

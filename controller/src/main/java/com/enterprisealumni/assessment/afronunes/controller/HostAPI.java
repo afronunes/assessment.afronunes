@@ -4,12 +4,10 @@
  */
 package com.enterprisealumni.assessment.afronunes.controller;
 
+import com.enterprisealumni.assessment.afronunes.controller.exception.ErrorLoadingFileException;
 import com.enterprisealumni.assessment.afronunes.service.HostService;
-import com.enterprisealumni.assessment.afronunes.service.bo.Host;
 import com.enterprisealumni.assessment.afronunes.service.dto.HostDTO;
-import com.enterprisealumni.assessment.afronunes.service.mapper.HostMapper;
 import com.enterprisealumni.assessment.afronunes.service.type.HostFilesType;
-import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
-import java.util.Collections;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,35 +41,44 @@ public class HostAPI {
 
     @GetMapping(path = URL_HOSTS_JSON, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public List<HostDTO> hostsJson() {
+    public List<HostDTO> hostsJson() throws ErrorLoadingFileException {
 
-        return hostService.getHostsFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
+        try {
+            return hostService.getHostsFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
+        } catch (Exception e) {
+            throw new ErrorLoadingFileException();
+        }
 
     }
 
     @GetMapping(path = URL_HOSTS, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public String hosts() {
+    public String hosts() throws ErrorLoadingFileException {
 
-        final List<HostDTO> hostsDTOS = hostService.getHostsFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
-        return hostsDTOS.stream().map(HostDTO::getFullInfo).collect(Collectors.joining("|"));
+        final List<HostDTO> hostsDTOS;
+        try {
+            hostsDTOS = hostService.getHostsFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
+            return hostsDTOS.stream().map(HostDTO::getFullInfo).collect(Collectors.joining("|"));
+        } catch (Exception e) {
+            throw new ErrorLoadingFileException();
+        }
 
     }
 
     @GetMapping(path = URL_HOSTS_FILE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<InputStreamResource> hostsFile() throws Exception {
+    public ResponseEntity<InputStreamResource> hostsFile() throws ErrorLoadingFileException {
 
-        // get Hosts file
-        final InputStreamResource fileStream;
         try {
-            fileStream = hostService.getHostsFileFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
+
+            final InputStream inputStream = hostService.getHostsFileFromFile("Coding_Demo_Data.txt", HostFilesType.DEFAULT);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(fileStream);
-        } catch (FileNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    .body(new InputStreamResource(inputStream));
+
+        } catch (Exception e) {
+            throw new ErrorLoadingFileException();
         }
     }
 

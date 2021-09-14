@@ -22,6 +22,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 
@@ -56,12 +58,12 @@ public class HostServiceTest {
         hostService = new HostServiceImpl(fileService,hostMapper);
 
         // mock fileService
-        when(fileService.loadFile(Matchers.any(DirectoryType.class), anyString())).thenReturn(getMockedFile());
+       // when(fileService.loadFile(Matchers.any(DirectoryType.class), anyString())).thenReturn(getMockedFile());
 
     }
 
     @Test
-    public void readLines() {
+    public void readLines() throws Exception {
         hostService.getHostsFromFile(FILE_NAME, HostFilesType.DEFAULT);
     }
 
@@ -71,20 +73,20 @@ public class HostServiceTest {
      * @return
      * @throws Exception
      */
-    private File getMockedFile() throws Exception {
-
-        // initial config
-        final URL url = classLoader.getResource(DirectoryType.INPUT.getPath());
-        final File parentFolder = new File(new URI(url.toString()));
-        final File newFile = new File(parentFolder, FILE_NAME);
-
-        // create file
-        FileUtils.touch(newFile);
-
-        // write on it
-        FileUtils.writeLines(newFile, TestUtils.getFileLines());
-
-        return newFile;
-    }
+//    private InputStream getMockedFile() throws Exception {
+//
+//        // initial config
+//        final URL url = classLoader.getResource(DirectoryType.INPUT.getPath());
+//        final File parentFolder = new File(new URI(url.toString()));
+//        final File newFile = new File(parentFolder, FILE_NAME);
+//
+//        // create file
+//        FileUtils.touch(newFile);
+//
+//        // write on it
+//        FileUtils.writeLines(newFile, TestUtils.getFileLines());
+//
+//        return newFile;
+//    }
 
 }
